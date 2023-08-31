@@ -16,20 +16,20 @@ loaded_model = joblib.load(fileName)
 @PropertyPricePredictionApp.route('/')
 def index():
     heading = 'Property Price Prediction Model'
-    return render_template("index.html", heading=heading)
-
-
-@PropertyPricePredictionApp.route('/index.html')
-def back_to_index():
-    heading = 'Property Price Prediction Model'
-    return render_template("index.html", heading=heading)
+    return render_template("home.html", heading=heading)
 
 
 @PropertyPricePredictionApp.route('/home.html')
+def back_to_index():
+    heading = 'Property Price Prediction Model'
+    return render_template("home.html", heading=heading)
+
+
+@PropertyPricePredictionApp.route('/describeProject.html')
 @cross_origin()
 def home():
     heading = 'Property Price Prediction'
-    return render_template("home.html", heading=heading)
+    return render_template("describeProject.html", heading=heading)
 
 
 # 4. Expose the prediction functionality, make a prediction from the passed
@@ -95,6 +95,19 @@ def price_prediction():
         print(str(predicted_value))
         return render_template('predictor.html', prediction_text="Property price is Rs. {}".format(predicted_value))
     return render_template("predictor.html")
+
+
+@PropertyPricePredictionApp.route("/retrain.html", methods=['GET', 'POST'])
+def model_training():
+    status = ' '
+    if request.method == "POST":
+        model_training_flag = float(request.form["RetrainModel"])
+        if model_training_flag == 1:
+            status = "Model Training Completed"
+        else:
+            status = "Model Training was selected as No"
+
+    return render_template("retrain.html", model_training_status=status)
 
 
 # 5. Run the API with uvicorn
