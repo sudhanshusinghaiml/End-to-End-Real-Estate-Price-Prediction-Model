@@ -4,7 +4,6 @@ from model_pipeline.preprocessing import create_features
 from model_pipeline import utils
 from model_pipeline.model_training import data_split
 from model_pipeline import model_training
-import os
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -31,7 +30,6 @@ def mlpipeline():
         # generate features
         created_feature_df = create_features(preprocessed_df)
 
-        print(created_feature_df.columns)
         # Splitting the data for model training and test
         x_train, x_test, y_train, y_test = data_split(created_feature_df, "Price_In_Lakhs", 0.3, 1234)
 
@@ -45,12 +43,10 @@ def mlpipeline():
                                                                           model_estimators)
         output_df = pd.concat([output_df, df_dict], ignore_index=True)
 
-        print(output_df)
-
         # saving model
         utils.pickle_dump(voting_ensemble, 'output/property_price_prediction_voting.sav')
         print("Voting Regressor model has been trained and saved in output folder!")
     except Exception as e:
-        print('Error in preprocess_data function', e)
+        print('Error in model_training_engine.mlpipeline function', e)
     else:
         return True

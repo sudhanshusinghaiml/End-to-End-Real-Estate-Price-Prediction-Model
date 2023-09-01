@@ -54,7 +54,7 @@ def get_interval(train_actual_values, train_predicted_values, pi=.60):
         interval_value = z_score * stddev
         print("Started Executing function utils.get_average_area")
     except Exception as e:
-        print('Error in get_interval function', e)
+        print('Error in utils.get_interval function', e)
     else:
         return interval_value
 
@@ -65,7 +65,7 @@ def get_average_area(x):
         regx_numbers = re.compile(r"[-+]?(\d*\.\d+|\d+)")
         x = regx_numbers.findall(x)
     except Exception as e:
-        print('Error in get_average_area function', e)
+        print('Error in utils.get_average_area function', e)
     else:
         if len(x) == 1:
             return np.float(x[0])
@@ -75,13 +75,13 @@ def get_average_area(x):
             return -99
 
 
-def get_prediction_interval(y_predicted_value, interval_value):
+def get_price_range(y_predicted_value, interval_value):
     try:
         print("Started Executing function utils.get_prediction_interval")
         # generate prediction interval lower and upper bound cs_24
         lower, upper = y_predicted_value - interval_value, y_predicted_value + interval_value
         print("Completed Executing function utils.get_prediction_interval")
     except Exception as e:
-        print('Error in get_prediction_interval function', e)
+        print('Error in utils.get_prediction_interval function', e)
     else:
         return lower, upper

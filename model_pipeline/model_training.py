@@ -1,12 +1,12 @@
 import pandas as pd
-import numpy as np
-import sklearn
+import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from sklearn.ensemble import VotingRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
+from model_pipeline.utils import get_interval
 
 
 def data_split(df, target_variable, size, seed):
@@ -21,7 +21,7 @@ def data_split(df, target_variable, size, seed):
         y = df[[target_variable]]
         x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=size, random_state=seed)
     except Exception as e:
-        print('Error in data_split function', e)
+        print('Error in model_training.data_split function', e)
     else:
         return x_train, x_test, y_train, y_test
 
@@ -72,7 +72,7 @@ def regression_model_training(x_train, x_test, y_train, y_test):
             output_df = pd.concat([output_df, df_score], ignore_index=True)
 
     except Exception as e:
-        print('Error in regression_model_training function', e)
+        print('Error in model_training.regression_model_training function', e)
     else:
         return output_df, model_estimators[0], model_estimators[1], model_estimators[2]
 
@@ -109,7 +109,15 @@ def ensemble_model_training(x_train, x_test, y_train, y_test, model_estimators):
         score_dict = dict(zip(columns_for_comparison, metrics_score))
         df_score = pd.DataFrame([score_dict])
 
+        # Getting the interval estimate for future test usage
+        interval_estimates = get_interval(y_train.values, y_prediction_training)
+        print(interval_estimates)
+
+        filename = 'output/estimating_interval.pkl'
+        with open(filename, 'wb') as f:
+            pickle.dump(interval_estimates, f)
+
     except Exception as e:
-        print('Error in ensemble_regressor function', e)
+        print('Error in model_training.ensemble_model_training function', e)
     else:
         return df_score, voting_ensemble

@@ -2,13 +2,11 @@ from flask import Flask, request, render_template
 from flask_cors import cross_origin
 import model_training_engine
 import joblib
+from model_pipeline.utils import get_price_range
+import pickle
 
 # 1. Create the Application Object
 PropertyPricePredictionApp = Flask(__name__)
-
-# 2. Load the model from disk
-fileName = 'output/property_price_prediction_model.sav'
-loaded_model = joblib.load(fileName)
 
 
 # 3. Index route, opens automatically on http://127.0.0.1:8000
@@ -89,10 +87,22 @@ def price_prediction():
                     stories_offering,
                     towers_stories,
                     world_class]]
-        print(data_df)
+
+        # Load the model from disk
+        fileName = 'output/property_price_prediction_model.sav'
+        loaded_model = joblib.load(fileName)
         predicted_value = loaded_model.predict(data_df)
-        print(str(predicted_value))
-        return render_template('predictor.html', prediction_text="Property price is Rs. {}".format(predicted_value))
+        print(int(predicted_value))
+
+        # load the price interval from disk
+        filename2 = 'output/estimating_interval.pkl'
+        with open(filename2, 'rb') as f:
+            estimated_interval = pickle.load(f)
+
+        lower_price, higher_price = get_price_range(predicted_value, estimated_interval)
+
+        return render_template('predictor.html',
+                               prediction_text="Property price is Rs. {} lakhs and Average Property price ranges from Rs.{} to Rs.{} lakhs".format(predicted_value, lower_price, higher_price))
     return render_template("predictor.html")
 
 

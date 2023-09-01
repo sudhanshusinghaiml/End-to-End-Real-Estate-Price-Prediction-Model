@@ -51,7 +51,7 @@ def get_outlier_range(df, cname):
         high_limit = df[cname].quantile(0.95)
         print("Completed Executing function preprocessing.get_outlier_range")
     except Exception as e:
-        print('Error in get_outlier_range function', e)
+        print('Error in preprocessing.get_outlier_range function', e)
     else:
         return low_limit, high_limit
 
@@ -75,7 +75,7 @@ def text_preprocess(text):
         text = text.strip()
         print("Completed Executing function preprocessing.text_preprocess")
     except Exception as e:
-        print('Error in text_preprocess function', e)
+        print('Error in preprocessing.text_preprocess function', e)
     else:
         return text
 
@@ -98,7 +98,7 @@ def get_pos_counter(text, part_of_speech):
         counts = Counter(tag for word, tag in tag_pos)
         print("Completed Executing function preprocessing.text_preprocess")
     except Exception as e:
-        print('Error in get_pos_counter function', e)
+        print('Error in preprocessing.get_pos_counter function', e)
     else:
         return counts[part_of_speech]
 
@@ -140,7 +140,7 @@ def preprocess_data(df):
         df_final = df_final.dropna()
         print("Completed Executing function preprocessing.preprocess_data")
     except Exception as e:
-        print('Error in preprocess_data function', e)
+        print('Error in preprocessing.preprocess_data function', e)
     else:
         return df_final
 
@@ -225,6 +225,6 @@ def create_features(df):
         df_final.columns = final_feature_list
 
     except Exception as e:
-        print('Error in create_features function', e)
+        print('Error in preprocessing.create_features function', e)
     else:
         return df_final
