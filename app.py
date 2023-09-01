@@ -7,7 +7,7 @@ import joblib
 PropertyPricePredictionApp = Flask(__name__)
 
 # 2. Load the model from disk
-fileName = 'property_price_prediction_model.sav'
+fileName = 'output/property_price_prediction_model.sav'
 loaded_model = joblib.load(fileName)
 
 
@@ -102,7 +102,7 @@ def model_training():
     if request.method == "POST":
         model_training_flag = float(request.form["RetrainModel"])
         if model_training_flag == 1:
-            status_flag = model_training_engine()
+            status_flag = model_training_engine.mlpipeline()
             if status_flag:
                 status = "Model Training Completed"
             else:

@@ -49,10 +49,8 @@ def get_interval(train_actual_values, train_predicted_values, pi=.60):
 
         # get interval from standard deviation
         one_minus_pi = 1 - pi
-        ppf_lookup = 1 - (
-                one_minus_pi / 2)  # If we need to calculate a 'Two-tail test' (i.e. We're concerned with values both greater and less than our mean) then we need to split the significance (i.e. our alpha value) because we're still using a calculation method for one-tail. The split in half symbolizes the significance level being appropriated to both tails. A 95% significance level has a 5% alpha; splitting the 5% alpha across both tails returns 2.5%. Taking 2.5% from 100% returns 97.5% as an input for the significance level.
-        z_score = stats.norm.ppf(
-            ppf_lookup)  # This will return a value (that functions as a 'standard-deviation multiplier') marking where 95% (pi%) of data points would be contained if our data is a normal distribution.
+        ppf_lookup = 1 - (one_minus_pi / 2)  # If we need to calculate a 'Two-tail test' (i.e. We're concerned with values both greater and less than our mean) then we need to split the significance (i.e. our alpha value) because we're still using a calculation method for one-tail. The split in half symbolizes the significance level being appropriated to both tails. A 95% significance level has a 5% alpha; splitting the 5% alpha across both tails returns 2.5%. Taking 2.5% from 100% returns 97.5% as an input for the significance level.
+        z_score = stats.norm.ppf(ppf_lookup)  # This will return a value (that functions as a 'standard-deviation multiplier') marking where 95% (pi%) of data points would be contained if our data is a normal distribution.
         interval_value = z_score * stddev
         print("Started Executing function utils.get_average_area")
     except Exception as e:
