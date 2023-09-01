@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template
 from flask_cors import cross_origin
-import sklearn
-import pandas as pd
+import model_training_engine
 import joblib
 
 # 1. Create the Application Object
@@ -103,7 +102,11 @@ def model_training():
     if request.method == "POST":
         model_training_flag = float(request.form["RetrainModel"])
         if model_training_flag == 1:
-            status = "Model Training Completed"
+            status_flag = model_training_engine()
+            if status_flag:
+                status = "Model Training Completed"
+            else:
+                status = "Model Training did not complete. It has some errors"
         else:
             status = "Model Training was selected as No"
 

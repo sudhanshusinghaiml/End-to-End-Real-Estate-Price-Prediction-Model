@@ -1,4 +1,4 @@
-flask
+flask~=2.3.3
 flask_cors
 joblib==1.1.1
 pandas==1.5.3
@@ -7,3 +7,5 @@ numpy==1.23.5
 scipy==1.10.0
 scikit-learn==1.2.1
 gunicorn
+fastapi~=0.101.0
+nltk~=3.8.1
