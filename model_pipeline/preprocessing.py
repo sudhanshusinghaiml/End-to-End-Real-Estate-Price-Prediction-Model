@@ -10,8 +10,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from model_pipeline.utils import get_average_area
 
 # nltk.download('punkt')
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
+# required for parts of speech tagging
+nltk.download('averaged_perceptron_tagger')
 
 """
     This file will store all the preprocessing related functions

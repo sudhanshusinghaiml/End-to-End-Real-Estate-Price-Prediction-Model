@@ -1,6 +1,4 @@
 stopwords
 punkt
-tokenize
 tag
-text
 taggers
