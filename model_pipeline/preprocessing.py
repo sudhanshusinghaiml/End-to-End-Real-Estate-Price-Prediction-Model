@@ -5,6 +5,7 @@ import pandas as pd
 import nltk
 from collections import Counter
 from nltk.corpus import stopwords
+from nltk import corpus
 from sklearn.feature_extraction.text import CountVectorizer
 
 from model_pipeline.utils import get_average_area
