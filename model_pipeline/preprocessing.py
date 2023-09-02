@@ -4,8 +4,6 @@ import numpy as np
 import pandas as pd
 import nltk
 from collections import Counter
-from nltk.corpus import stopwords
-from nltk import corpus
 from sklearn.feature_extraction.text import CountVectorizer
 
 from model_pipeline.utils import get_average_area
@@ -18,7 +16,22 @@ pd.set_option('display.max_columns', None)
     This file will store all the preprocessing related functions
 """
 # Setting up stopwords for Text Processing
-stopwords_list = set(stopwords.words('english'))
+stopwords_list = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll",
+                  "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's",
+                  'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs',
+                  'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is',
+                  'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did',
+                  'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at',
+                  'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after',
+                  'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again',
+                  'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both',
+                  'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same',
+                  'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've",
+                  'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn',
+                  "didn't", 'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't",
+                  'ma', 'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn',
+                  "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't"]
+
 # Custom Stopwords list
 custom_stopwords = ["i", "project", "living", "home", 'apartment', "pune", "me", "my", "myself", "we", "our",
                     "ours", "ourselves", "you", "you're", "you've", "you'll", "you'd", "your", "yours",
@@ -41,7 +54,7 @@ custom_stopwords = ["i", "project", "living", "home", 'apartment', "pune", "me",
                     "look", "hi", "sorry", "http", "https", "body", "dear", "hello", "hi", "thanks", "sir",
                     "tomorrow", "sent", "send", "see", "there", "welcome", "what", "well", "us"]
 
-stopwords_list.update(custom_stopwords)
+stopwords_list.extend(custom_stopwords)
 
 
 def get_outlier_range(df, cname):
@@ -204,14 +217,19 @@ def create_features(df):
             pickle.dump(count_vectorizer, f)
 
         # selecting the final features ready for ML Models
-        remove_columns_list = ['City', 'State', 'Country', 'SubArea', 'CompanyName', 'TownshipSocietyName', 'Description', 'every day']
+        remove_columns_list = ['City', 'State', 'Country', 'SubArea', 'CompanyName', 'TownshipSocietyName',
+                               'Description', 'every day']
         df_final = df.drop(remove_columns_list, axis=1)
 
         features_list = df_final.columns.tolist()
-        final_feature_list = ['Property_Type', 'Property_Area_in_SqFt', 'Price_In_Lakhs', 'Club_House', 'School_University_In_Township',
-                              'Hospital_In_Township', 'Mall_In_Township', 'Park_Jogging_Track', 'Swimming_Pool', 'Gym', 'Price_By_SubArea',
-                              'Amenities_Score', 'Price_By_Amenities_Score', 'Noun_Counts', 'Verb_Counts', 'Adjective_Counts', 'boasts_elegant',
-                              'elegant_towers', 'great_community', 'mantra_gold', 'offering_bedroom', 'quality_specification', 'stories_offering',
+        final_feature_list = ['Property_Type', 'Property_Area_in_SqFt', 'Price_In_Lakhs', 'Club_House',
+                              'School_University_In_Township',
+                              'Hospital_In_Township', 'Mall_In_Township', 'Park_Jogging_Track', 'Swimming_Pool', 'Gym',
+                              'Price_By_SubArea',
+                              'Amenities_Score', 'Price_By_Amenities_Score', 'Noun_Counts', 'Verb_Counts',
+                              'Adjective_Counts', 'boasts_elegant',
+                              'elegant_towers', 'great_community', 'mantra_gold', 'offering_bedroom',
+                              'quality_specification', 'stories_offering',
                               'towers_stories', 'world_class']
 
         raw_features_mapping = dict(zip(features_list, final_feature_list))
