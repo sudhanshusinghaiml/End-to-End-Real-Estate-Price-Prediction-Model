@@ -4,3 +4,4 @@ word_tokenize
 pos_tag
 Text
 averaged_perceptron_tagger
+taggers
