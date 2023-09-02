@@ -4,12 +4,12 @@ import numpy as np
 import pandas as pd
 import nltk
 from collections import Counter
-from nltk.corpus import stopwords
-from nltk import corpus
+# from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 
 from model_pipeline.utils import get_average_area
 
+# nltk.download('stopwords')
 nltk.download('punkt')
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -18,7 +18,21 @@ pd.set_option('display.max_columns', None)
     This file will store all the preprocessing related functions
 """
 # Setting up stopwords for Text Processing
-stopwords_list = set(stopwords.words('english'))
+# stopwords_list = set(stopwords.words('english'))
+
+# Setting up stopwords manually to bypass heroku NLTK download error on heroku
+#
+stopwords_list = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 's', 't', 'can',
+                  'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers', 'just',
+                  'herself', 'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'don', 'should', 'will',
+                  'what', 'which', 'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are', 'now', 'too', 'very',
+                  'was', 'were', 'be', 'been', 'being','have', 'has', 'had', 'having', 'do', 'does', 'so', 'than', 'own', 'same',
+                  'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'not', 'only', 'more',
+                  'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'such', 'no', 'nor', 'most',
+                  'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'other', 'some', 'each',
+                  'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'few', 'any', 'both',
+                  'there', 'when', 'where', 'why', 'how', 'all']
+
 # Custom Stopwords list
 custom_stopwords = ["i", "project", "living", "home", 'apartment', "pune", "me", "my", "myself", "we", "our",
                     "ours", "ourselves", "you", "you're", "you've", "you'll", "you'd", "your", "yours",
@@ -41,7 +55,7 @@ custom_stopwords = ["i", "project", "living", "home", 'apartment', "pune", "me",
                     "look", "hi", "sorry", "http", "https", "body", "dear", "hello", "hi", "thanks", "sir",
                     "tomorrow", "sent", "send", "see", "there", "welcome", "what", "well", "us"]
 
-stopwords_list.update(custom_stopwords)
+stopwords_list.extend(custom_stopwords)
 
 
 def get_outlier_range(df, cname):
