@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from model_pipeline.utils import get_average_area
 
-nltk.download('punkt')
+# nltk.download('punkt')
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 
