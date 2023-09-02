@@ -1,0 +1,5 @@
+stopwords
+punkt
+word_tokenize
+pos_tag
+Text
