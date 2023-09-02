@@ -1,4 +1,2 @@
 stopwords
 punkt
-tag
-taggers
