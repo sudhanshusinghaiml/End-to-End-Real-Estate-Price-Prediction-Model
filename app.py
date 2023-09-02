@@ -92,17 +92,15 @@ def price_prediction():
         fileName = 'output/property_price_prediction_model.sav'
         loaded_model = joblib.load(fileName)
         predicted_value = loaded_model.predict(data_df)
-        print(int(predicted_value))
 
-        # load the price interval from disk
-        filename2 = 'output/estimating_interval.pkl'
-        with open(filename2, 'rb') as f:
-            estimated_interval = pickle.load(f)
-
-        lower_price, higher_price = get_price_range(predicted_value, estimated_interval)
+        # # load the price interval from disk
+        # filename2 = 'output/estimating_interval.pkl'
+        # with open(filename2, 'rb') as f:
+        #     estimated_interval = pickle.load(f)
+        # lower_price, higher_price = get_price_range(predicted_value, estimated_interval)
 
         return render_template('predictor.html',
-                               prediction_text="Property price is Rs. {} lakhs and Average Property price ranges from Rs.{} to Rs.{} lakhs".format(predicted_value, lower_price, higher_price))
+                               prediction_text="Property price is Rs. {} ".format(abs(round(predicted_value[0], 2))))
     return render_template("predictor.html")
 
 

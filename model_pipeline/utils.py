@@ -30,14 +30,14 @@ def pickle_dump(data, filename):
         print(e)
 
 
-def get_interval(train_actual_values, train_predicted_values, pi=.60):
+def get_interval(train_actual_values, train_predicted_values, pi=.20):
     """
     Get a prediction interval for the regression model.
 
     INPUTS:
         - actual_values (y_train)
         - predicted_values (prediction from x_train)
-        - Prediction interval threshold (default = .95)
+        - Prediction interval threshold (default = .20)
     OUTPUT:
         - Interval estimate
     """
@@ -45,13 +45,26 @@ def get_interval(train_actual_values, train_predicted_values, pi=.60):
         print("Started Executing function utils.get_interval")
         # get standard deviation of prediction on the train dataset
         sum_of_square_error = np.sum((train_actual_values - train_predicted_values) ** 2)
+        print(sum_of_square_error)
         stddev = np.sqrt(sum_of_square_error / (len(train_actual_values) - 1))
-
+        print(stddev)
         # get interval from standard deviation
         one_minus_pi = 1 - pi
-        ppf_lookup = 1 - (one_minus_pi / 2)  # If we need to calculate a 'Two-tail test' (i.e. We're concerned with values both greater and less than our mean) then we need to split the significance (i.e. our alpha value) because we're still using a calculation method for one-tail. The split in half symbolizes the significance level being appropriated to both tails. A 95% significance level has a 5% alpha; splitting the 5% alpha across both tails returns 2.5%. Taking 2.5% from 100% returns 97.5% as an input for the significance level.
-        z_score = stats.norm.ppf(ppf_lookup)  # This will return a value (that functions as a 'standard-deviation multiplier') marking where 95% (pi%) of data points would be contained if our data is a normal distribution.
+        print(one_minus_pi)
+        # If we need to calculate a 'Two-tail test' (i.e. We're concerned with values both greater and
+        # less than our mean) then we need to split the significance (i.e. our alpha value)
+        # because we're still using a calculation method for one-tail.
+        # The split in half symbolizes the significance level being appropriated to both tails.
+        # A 95% significance level has a 5% alpha; splitting the 5% alpha across both tails returns 2.5%.
+        # Taking 2.5% from 100% returns 97.5% as an input for the significance level.
+        ppf_lookup = 1 - (one_minus_pi / 2)
+        print(ppf_lookup)
+        # This will return a value (that functions as a 'standard-deviation multiplier') marking
+        # where 95% (pi%) of data points would be contained if our data is a normal distribution.
+        z_score = stats.norm.ppf(ppf_lookup)
+        print(z_score)
         interval_value = z_score * stddev
+        print(interval_value)
         print("Started Executing function utils.get_average_area")
     except Exception as e:
         print('Error in utils.get_interval function', e)
@@ -78,6 +91,7 @@ def get_average_area(x):
 def get_price_range(y_predicted_value, interval_value):
     try:
         print("Started Executing function utils.get_prediction_interval")
+        print(interval_value)
         # generate prediction interval lower and upper bound cs_24
         lower, upper = y_predicted_value - interval_value, y_predicted_value + interval_value
         print("Completed Executing function utils.get_prediction_interval")
