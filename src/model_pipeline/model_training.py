@@ -6,7 +6,7 @@ from sklearn.ensemble import VotingRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from model_pipeline.utils import get_interval
+from src.model_pipeline.utils import get_interval
 
 
 def data_split(df, target_variable, size, seed):

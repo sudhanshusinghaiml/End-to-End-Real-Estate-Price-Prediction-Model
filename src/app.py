@@ -2,8 +2,6 @@ from flask import Flask, request, render_template
 from flask_cors import cross_origin
 import model_training_engine
 import joblib
-from model_pipeline.utils import get_price_range
-import pickle
 
 # 1. Create the Application Object
 PropertyPricePredictionApp = Flask(__name__)
@@ -89,7 +87,7 @@ def price_prediction():
                     world_class]]
 
         # Load the model from disk
-        fileName = 'output/property_price_prediction_model.sav'
+        fileName = '../output/property_price_prediction_model.sav'
         loaded_model = joblib.load(fileName)
         predicted_value = loaded_model.predict(data_df)
 

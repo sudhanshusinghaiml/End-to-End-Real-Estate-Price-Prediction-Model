@@ -7,7 +7,7 @@ from nltk.corpus import stopwords
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
 
-from model_pipeline.utils import get_average_area
+from src.model_pipeline.utils import get_average_area
 
 # nltk.download('punkt')
 # required for parts of speech tagging

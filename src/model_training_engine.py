@@ -1,9 +1,8 @@
 import pandas as pd
-from model_pipeline.preprocessing import preprocess_data
-from model_pipeline.preprocessing import create_features
-from model_pipeline import utils
-from model_pipeline.model_training import data_split
-from model_pipeline import model_training
+from src.model_pipeline.preprocessing import preprocess_data
+from src.model_pipeline.preprocessing import create_features
+from src.model_pipeline import utils, model_training
+from src.model_pipeline.model_training import data_split
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -22,7 +21,7 @@ def mlpipeline():
     """
 
     try:
-        df = utils.read_data('input/Pune Real Estate Data.xlsx')
+        df = utils.read_data('../input/Pune Real Estate Data.xlsx')
 
         # preprocess data
         preprocessed_df = preprocess_data(df)
@@ -44,7 +43,7 @@ def mlpipeline():
         output_df = pd.concat([output_df, df_dict], ignore_index=True)
 
         # saving model
-        utils.pickle_dump(voting_ensemble, 'output/property_price_prediction_voting.sav')
+        utils.pickle_dump(voting_ensemble, '../output/property_price_prediction_voting.sav')
         print("Voting Regressor model has been trained and saved in output folder!")
     except Exception as e:
         print('Error in model_training_engine.mlpipeline function', e)
