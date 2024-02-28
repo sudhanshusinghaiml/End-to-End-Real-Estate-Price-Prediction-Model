@@ -9,7 +9,7 @@ $ cd End-to-End-Real-Estate-Price-Prediction-Model
 
 ## Tech Stack:
  - **Language**: Python
- - **Libraries**: Flask, gunicorn, scipy, xgboost, joblib, seaborn, scikit_learn, NLTK
+ - **Libraries**: Flask, gunicorn, scipy, linear regression, Ridge Regression, Lasso Regression, joblib, seaborn, scikit_learn, NLTK
  - **Services:** Flask, Deployment on Heroku Platform
 
 ## Project Approach:
