@@ -5,6 +5,9 @@ This is a sample project for price prediction of Real Estate Property. Model is 
 ```
 $ git clone https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model.git
 $ cd End-to-End-Real-Estate-Price-Prediction-Model
+$ python -m venv venv/
+$ source venv/Scripts/activate
+$ pip install -r requirements.txt
 ```
 
 ## Tech Stack:
@@ -33,28 +36,28 @@ $ cd End-to-End-Real-Estate-Price-Prediction-Model
 
 - Exploratory Data Analysis:
 
-  * ***[No of Property in each sub Area](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/subArea_propertyCount.png)***
+  * ***[No of Property in each sub Area](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/subArea_propertyCount.png)***
     
-  ![Images No of Property in each sub Area](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/subArea_propertyCount.png)
+  ![Images No of Property in each sub Area](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/subArea_propertyCount.png)
 
 
-  * ***[HousesBuildbyEachCountry](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/HousesBuildbyEachCountry.png)***
+  * ***[HousesBuildbyEachCountry](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/HousesBuildbyEachCountry.png)***
     
-  ![Images HousesBuildbyEachCountry](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/HousesBuildbyEachCountry.png)
+  ![Images HousesBuildbyEachCountry](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/HousesBuildbyEachCountry.png)
 
 
 - Linear Regression, Lasso Regression and Ridge Regression Algorithm are used and model is evaluated for performance based on RMSE , MAE as performance metrics.
 - Screenshot for Inference Pipeline and Model Training
-  * ***[Home Page](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/home-page.jpg)***
+  * ***[Home Page](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/home-page.jpg)***
     
-  ![Image Home Page](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/home-page.jpg)
+  ![Image Home Page](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/home-page.jpg)
 
 
-  * ***[Price Prediction](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/model-prediction.jpg)***
+  * ***[Price Prediction](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/model-prediction.jpg)***
     
-  ![Image Price Prediction](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/model-prediction.jpg)
+  ![Image Price Prediction](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/model-prediction.jpg)
 
 
-  * ***[Model Training](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/model-training.jpg)***
+  * ***[Model Training](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/model-training.jpg)***
     
-  ![Model Training Image](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/results/model-training.jpg)
+  ![Model Training Image](https://github.com/sudhanshusinghaiml/End-to-End-Real-Estate-Price-Prediction-Model/blob/develop/images/model-training.jpg)
